@@ -1,0 +1,387 @@
+@media (min-width: 64em) {
+    .control-panel-playlist {
+        display: none;
+    }
+}
+
+body {
+    background-color: var(--background-color);
+}
+/* Navigation bar */
+#nav {
+    background-color: #fff;
+    width: 95%;
+    height: 100%;
+    padding-left: 40px;
+}
+
+#logo {
+    background: url('../../img/nav/logo.png') no-repeat center / contain;
+    width: 150px;
+    height: 75px;
+    /* margin-bottom: 20px; */
+}av {
+}
+
+.nav__logo-link {
+
+}
+
+.nav__list-tile {
+    font-size: 1.5rem;
+    color: #a8a4b2;
+    margin: 10px 0;
+}
+
+.nav__list {
+    list-style: none;
+}
+
+.nav__item {
+    line-height: 1.6;
+    font-size: 1.6rem;
+    padding: 20px;
+}
+
+.nav__item-icon {
+    font-size: 1.6rem;
+}
+
+.nav__item-link {
+    /* display: block; */
+    text-decoration: none;
+    font-size: 1.8rem;
+    color: #68676a;
+    padding-left: 10px;
+}
+.nav__item.active {
+    background-color: #000;
+    max-width: 250px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.nav__item.active,
+.nav__item.active .nav__item-link {
+    color: #fff;
+    /* position: relative; */
+}
+
+.nav__item.active::after {
+    position: absolute;
+    content: "";
+    display: block;
+    width: 5px;
+    height: 100%;
+    background-color: #000;
+    right: -50px;
+    top: 0;
+    bottom: 0;
+    border-radius: 15px;
+    display: none;
+}
+
+
+/* Container */
+#search {
+    /* display: flex;
+    justify-content: center; */
+    width: 500px;
+    height: 50px;
+    background-color: #fff;
+    border-radius: 25px;
+    font-size: 1.6rem;
+    padding: 20px;
+    margin: 10px;
+    border: 1px solid #dbdbdb;
+}
+
+#slider {
+    margin-top: 10px;
+}
+
+.container__desc {
+    font-size: 1.4rem;
+    color: var(--secondary-text-color);
+}
+
+.container__title {
+    font-size: 4rem;
+    margin: 20px 0;
+}
+
+.slider__img {
+    background: url('../../img/slider/slider-img.jfif') no-repeat center / cover;
+    /* width: 100%; */
+    /* display: inline-flex; */
+    height: 250px;
+    border-radius: 15px;
+    padding: 40px 25px;
+    /* position: absolute; */
+}
+
+.slider__img-intro {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #fff;
+
+}
+
+.slider__img-title {
+    font-size: 4rem;
+    color: #fff;
+}
+
+.slider__viewer {
+    text-align: right;
+    right: 30px;
+    bottom: 30px;
+    font-size: 2.4rem;
+    color: #fff;
+}
+
+.slider__viewer-title {
+    margin-bottom: 5px;
+}
+
+.slider__viewer-number {
+
+}
+
+
+
+/* Playlist */
+#playlist {
+    margin-bottom: 10px;
+}
+
+.playlist__title {
+    font-size: 1.6rem;
+    padding: 10px 0;    
+    color: var(--secondary-text-color);
+}
+
+.playlist__label {
+    font-size: 1.8rem;
+    padding: 15px 0;
+    color: var(--primary-text-color);
+}
+
+#playlist .row.active {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 3px #dbdbdb;
+}
+
+
+/* Control Panel */
+#control-panel {
+    background-color: #fff;
+    width: 100%;
+    min-height: 150px;
+    border-radius: 15px;
+    padding: 20px 50px;
+}
+
+.control-panel-playlist {
+
+}
+
+.panel-playlist__cd {
+    --square: 300px;
+    width: var(--square);
+    height: var(--square);
+    margin: auto;
+    border-radius: 50%;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+}
+
+.panel-playlist__name {
+    font-size: 4rem;
+}
+
+.panel-playlist__artist {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+
+.control-panel-nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+.panel__left {
+    font-size: 3rem;
+}
+
+.panel__left-icon {
+    padding: 5px;
+    background-color: var(--background-color);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.panel__left-icon:hover {
+    color: var(--primary-color);
+}
+
+.panel__center-icon {
+    font-size: 2rem;
+    margin: 10px 15px;
+    cursor: pointer;
+}
+
+.panel__center i.active {
+    color: var(--primary-color);
+}
+
+.panel__center-toggle i {
+    font-size: 5rem;
+    margin: 0 10px;
+}
+
+/* Pause */
+.panel__center-toggle .fa-pause-circle {
+    display: none;
+}
+
+.panel__center-toggle .fa-play-circle {
+    display: block;
+}
+
+/* Playing */
+.panel__center-toggle.playing .fa-pause-circle {
+    display: block;
+}
+
+.panel__center-toggle.playing .fa-play-circle {
+    display: none;
+}
+
+.panel__right-vol-bar {
+    width: 75px;
+    height: 3px;
+    background-color: var(--secondary-text-color);
+    display: inline-block;
+    transform: translateY(-200%);
+    margin: 0 5px;
+}
+
+.panel__right {
+    font-size: 3rem;
+}
+
+.control-panel-time {
+    margin-top: 30px;
+    display: flex;
+}
+
+.panel-time__duration,
+.panel-length {
+    font-size: 1.6rem;
+}
+
+.panel-time_bar {
+    flex: 1;
+    height: 3px;
+    background-color: var(--secondary-text-color);
+    /* background: #d3d3d3; */
+    display: inline-block;
+    transform: translateY(300%);
+    margin: 0 20px;
+    position: relative;
+}
+
+/* .panel-time_bar::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 6px;
+    background-color: #000;
+    cursor: pointer;
+  } */
+
+.panel-time_bar-ball {
+    position: absolute;
+    font-size: 2rem;
+    transform: translateY(-40%);
+
+}
+
+/* Header: Search & Account */
+#sidebar {
+    padding: 0 20px;
+}
+#header {
+    /* background-color: blue; */
+    width: 100%;
+    height: 90px;
+}
+
+.header-search {
+
+}
+
+/* Shortcuts */
+#shortcuts {
+    
+}
+
+.shortcuts-title,
+.fav-title {
+    font-size: 2.4rem;
+    margin-bottom: 20px;
+}   
+
+.shortcuts-tag {
+    --height: 50px;
+    background-color: #fff;
+    border-radius: 10px;
+    width: 200px;
+    height: var(--height);
+    line-height: 30px;
+    font-size: 2rem;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+}
+
+/* Favourite Artists */
+#fav {
+
+}
+
+.fav-artist {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding-right: 20px;
+}
+
+.fav-artist-img {
+    display: inline-block;
+    --square: 25px;
+    width: var(--square);
+    height: var(--square);
+    border-radius: 50%;
+}
+
+.fav-artist-info {
+
+}
+
+.fav-artist-info-name {
+    font-size: 1.6rem;
+}
+
+.fav-artist-info-desc {
+    font-size: 1.4rem;
+}
+
+
+.fav-artist i {
+    font-size: 3rem;
+}
