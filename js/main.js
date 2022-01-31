@@ -1,6 +1,8 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
+const PLAYER_STORAGE_KEY = 'Bee_Music';
+
 const cd = $('.panel-playlist__cd');
 const cdSize = cd.offsetWidth;
 const audio = $('.audio');
@@ -12,6 +14,7 @@ const prevBtn = $('.fa-fast-backward');
 const nextBtn = $('.fa-fast-forward');
 const shuffleBtn = $('.fa-random');
 const repeatBtn = $('.fa-redo-alt');
+const playlist = $('#playlist')
 
 var currentIndex = 0;
 var isPlaying = false;
@@ -58,7 +61,24 @@ const app = {
         }
     ],
 
+    // config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
+    
+    setConfig: function(key, value) {
+        this.config[key] = value;
+        localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(this.config))
+    },
+
+    loadConfig: function() {
+        this.isShuffle = this.config.isShuffle;
+        this.isRepeat = this.config.isRepeat;
+        // --------- or
+        // Object.assign(this, this.config) // Not recommneded
+    },
+
     start: function() {
+        // Assign settings from config to app
+        // this.loadConfig()
+
         this.defineProperties();
         this.renderSongs();
         this.handleEvents();
@@ -69,7 +89,7 @@ const app = {
     renderSongs: function() {
         const htmlContainer = this.songs.map((song, index) => {
             return `
-                <div class="row ${index === currentIndex ? 'active' : ''}">
+                <div class="row song ${index === currentIndex ? 'active' : ''}" data-index="${index}">
                     <div class="playlist__label col l-1 m-1 c-1">${index + 1}</div>
                     <div class="playlist__label col l-4 m-4 c-5">${song.name}</div>
                     <div class="playlist__label col l-3 m-3 c-4">${song.singer}</div>
@@ -89,7 +109,6 @@ const app = {
             </div>
         ` + htmlContainer.join('');
         document.getElementById('playlist').innerHTML = htmlsContainer;
-        console.log(currentIndex)
     },
 
     handleEvents: function() {
@@ -161,6 +180,7 @@ const app = {
             }
             audio.play();
             _this.renderSongs();
+            // _this.scrollToActiveSong()
         }
 
         // When click previous button
@@ -178,6 +198,7 @@ const app = {
         shuffleBtn.onclick = function(e) {
             _this.isShuffle = !_this.isShuffle;
             e.target.classList.toggle('active');
+            _this.setConfig('isShuffle', _this.isShuffle);
         }
 
         // When song is ended
@@ -188,10 +209,36 @@ const app = {
                 nextBtn.click()
             }
         }
-
+        // Handle when song is repeated
         repeatBtn.onclick = function(e) {
             _this.isRepeat = !_this.isRepeat;
             e.target.classList.toggle('active');
+            _this.setConfig('isRepeat', _this.isRepeat);
+        }
+
+        // Click song to play
+        playlist.onclick = function(e) {
+            const songElement = e.target.closest('.song:not(.active)');
+            if (
+                songElement 
+                // || e.target.closest('.option')
+                ) {
+                // Handle when click song
+                if (songElement) {
+                    // console.log(songElement.getAttribute('data-index'))
+                    // ---------or
+                    // console.log(songElement.dataset.index)
+                    currentIndex = Number(songElement.dataset.index);
+                    _this.loadCurrentSong()
+                    audio.play();
+                    _this.renderSongs();
+                }
+
+                // Handle when click option button
+                // if (e.target.closest('.option')) {
+
+                // }
+            }
         }
     },
 
@@ -229,7 +276,6 @@ const app = {
         if (currentIndex < 0) {
             currentIndex = this.songs.length - 1;
         }
-        console.log(currentIndex)
         this.loadCurrentSong();
     },
     randomSong: function() {
@@ -240,8 +286,13 @@ const app = {
         currentIndex = newIndex;
         this.loadCurrentSong();
     },
-    repeatSong: function() {
-
+    scrollToActiveSong: function() {
+        setTimeout(() => {
+            $('#playlist .song.active').scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            })
+        }, 300)
     }
 }
 

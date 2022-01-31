@@ -167,10 +167,18 @@ body {
     color: var(--primary-text-color);
 }
 
-#playlist .row.active {
+#playlist .song {
+    cursor: pointer;
+}
+
+#playlist .song.active {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 0 3px #dbdbdb;
+}
+
+#playlist .song:active {
+    opacity: 0.8;
 }
 
 
