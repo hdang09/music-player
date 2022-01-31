@@ -91,10 +91,10 @@ const app = {
             return `
                 <div class="row song ${index === currentIndex ? 'active' : ''}" data-index="${index}">
                     <div class="playlist__label col l-1 m-1 c-1">${index + 1}</div>
-                    <div class="playlist__label col l-4 m-4 c-5">${song.name}</div>
+                    <div class="playlist__label col l-5 m-5 c-5">${song.name}</div>
                     <div class="playlist__label col l-3 m-3 c-4">${song.singer}</div>
                     <div class="playlist__label col l-1 m-1 c-2">1:25</div>
-                    <div class="playlist__label col l-3 m-3 c-0">The Ecstatic</div>
+                    <div class="playlist__label col l-2 m-2 c-0">m-tp M-TP</div>
                 </div>
             `
         })
@@ -102,10 +102,10 @@ const app = {
             <h1 class="container__title">My Playlist</h1>
             <div class="row">
                 <div class="playlist__title col l-1 m-1 c-1">#</div>
-                <div class="playlist__title col l-4 m-4 c-5">TITLE</div>
+                <div class="playlist__title col l-5 m-5 c-5">TITLE</div>
                 <div class="playlist__title col l-3 m-3 c-4">ARTIST</div>
                 <div class="playlist__title col l-1 m-1 c-2">TIME</div>
-                <div class="playlist__title col l-3 m-3 c-0">ALBUM</div>
+                <div class="playlist__title col l-2 m-2 c-0">ALBUM</div>
             </div>
         ` + htmlContainer.join('');
         document.getElementById('playlist').innerHTML = htmlsContainer;
@@ -297,3 +297,100 @@ const app = {
 }
 
 app.start();
+
+
+toast = function({
+    title = '', 
+    message = '', 
+    type = '', 
+    duration = 3000
+}) {
+    const main = document.getElementById('toast')
+    if (main) {
+        const toast = document.createElement('div')
+        const icons = {
+            success: 'fas fa-check-circle',
+            info: 'fas fa-info-circle',
+            warn: 'fas fa-exclamation-circle',
+            error: 'fas fa-exclamation-circle',
+        };
+        const icon = icons[type];
+        const delay = (duration / 1000).toFixed(2);
+
+        toast.classList.add('toast', `toast--${type}`);
+        toast.style.animation = `wipeIn ease 0.25s, fadeOut ease-in-out 1s ${delay}s forwards`;
+        
+        toast.innerHTML = `
+        <i class="toast__icon ${icon}"></i>
+        <div class="toast__body">
+            <h3 class="toast__title">${ title}</h3>
+            <p class="toast__msg">${message}</p>
+        </div>
+        <i class="toast__close fas fa-times"></i>
+        `;
+
+        
+        main.appendChild(toast);
+
+        // Auto remove toast
+        const autoRemovId = setTimeout(() => {
+            main.removeChild(toast)
+        }, duration + 1000) // times remvoe from DOM
+
+        // const closeBtn = $('.toast__close');
+        // closeBtn.onclick = function() {
+        //     // main.outerHTML = ''
+        //     console.log({main})
+        //     main.removeChild(this)
+
+        // }
+        // -------or
+        toast.onclick = function(e) {
+            // console.log(e.target)
+            if (e.target.closest('.toast__close')) {
+                main.removeChild(toast);
+                clearTimeout(autoRemovId)
+            }
+        }
+
+    }
+
+    
+}
+
+function showSuccessToast() {
+    toast({
+    title: 'Ooops...',
+    message: 'This funnction will be upgraded soon',
+    type: 'success',
+    duration: 3000
+});
+}
+
+function showInfoToast() {
+    toast({
+    title: 'Ooops...',
+    message: 'This funnction will be upgraded soon',
+    type: 'info',
+    duration: 3000
+});
+}
+
+function showWarningToast() {
+    toast({
+    title: 'Ooops...',
+    message: 'This funnction will be upgraded soon',
+    type: 'warn',
+    duration: 3000
+});
+}
+
+function showErrorToast() {
+    toast({
+    title: 'Ooops...',
+    message: 'This funnction will be upgraded soon',
+    type: 'error',
+    duration: 5000
+});
+}
+

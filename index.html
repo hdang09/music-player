@@ -33,44 +33,62 @@
                     <!-- <i class="fas fa-bars"></i> -->
                     <ul class="nav__list">
                         <li class="nav__item active">
-                            <i class="nav__item-icon fas fa-home"></i>
-                            <a href="" class="nav__item-link">Home</a>
+                            <div class="nav__item-box">
+                                <i class="nav__item-icon fas fa-home"></i>
+                                <a href="#" class="nav__item-link">Home</a>
+                            </div>
                         </li>
-                        <li class="nav__item">
-                            <i class="nav__item-icon fas fa-comment-dots"></i>
-                            <a href="" class="nav__item-link">Trends</a>
+                        <li onclick="showSuccessToast()" class="nav__item">
+                            <div class="nav__item-box">
+                                <i class="nav__item-icon fas fa-comment-dots"></i>
+                                <a href="#" class="nav__item-link">Trends</a>
+                            </div>
                         </li>
-                        <li class="nav__item">
-                            <i class="nav__item-icon fas fa-compass"></i>
-                            <a href="" class="nav__item-link">Feed</a>
+                        <li onclick="showInfoToast()" class="nav__item">
+                            <div class="nav__item-box">
+                                <i class="nav__item-icon fas fa-compass"></i>
+                                <a href="#" class="nav__item-link">Feed</a>
+                            </div>
                         </li>
 
                         <h2 class="nav__list-tile">Discover</h2>
-                        <li class="nav__item">
-                            <i class="nav__item-icon fas fa-th-large"></i>
-                            <a href="" class="nav__item-link">New and Notable</a>
+                        <li onclick="showWarningToast()" class="nav__item">
+                            <div class="nav__item-box">
+                                <i class="nav__item-icon fas fa-th-large"></i>
+                                <a href="#" class="nav__item-link">New and Notable</a>
+                            </div>
                         </li>
-                        <li class="nav__item">
-                            <i class="nav__item-icon far fa-calendar"></i>
-                            <a href="" class="nav__item-link">Release Calendar</a>
+                        <li onclick="showErrorToast()" class="nav__item">
+                            <div class="nav__item-box">
+                                <i class="nav__item-icon far fa-calendar"></i>
+                                <a href="#" class="nav__item-link">Release Calendar</a>
+                            </div>
                         </li>
-                        <li class="nav__item">
-                            <i class="nav__item-icon fas fa-ticket-alt"></i>
-                            <a href="" class="nav__item-link">Events</a>
+                        <li onclick="showWarningToast()" class="nav__item">
+                            <div class="nav__item-box">
+                                <i class="nav__item-icon fas fa-ticket-alt"></i>
+                                <a href="#" class="nav__item-link">Events</a>
+                            </div>
                         </li>
 
                         <h2 class="nav__list-tile">Your Collection</h2>
-                        <li class="nav__item">
-                            <i class="nav__item-icon fas fa-heart"></i>
-                            <a href="" class="nav__item-link">Favorite Songs</a>
+                        <li onclick="showWarningToast()" class="nav__item">
+                            <div class="nav__item-box">
+                                <i class="nav__item-icon fas fa-heart"></i>
+                                <a href="#" class="nav__item-link">Favorite Songs</a>
+                            </div>
                         </li>
-                        <li class="nav__item">
-                            <i class="nav__item-icon fas fa-users"></i>
-                            <a href="" class="nav__item-link">Artists</a>
+                        <li onclick="showWarningToast()" class="nav__item">
+                            <div class="nav__item-box">
+                                <i class="nav__item-icon fas fa-users"></i>
+                                <a href="#" class="nav__item-link">Artists</a>
+                            </div>
                         </li>
-                        <li class="nav__item">
-                            <i class="nav__item-icon fas fa-star"></i>
-                            <a href="" class="nav__item-link">Albums</a>
+                        <li onclick="showWarningToast()" class="nav__item">
+                            <div class="nav__item-box">
+                                <i class="nav__item-icon fas fa-star"></i>
+                                <a href="#" class="nav__item-link">Albums</a>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -79,9 +97,9 @@
             <div id="container" class="col l-9 m-11 c-12">
                 <div class="row">
                     <div class="col l-9 m-9 c-12">
-                        <!-- <div class="flex-c">
+                        <div class="flex-c">
                             <input id="search" type="text" placeholder="Search for artists, songs, albums, ...">
-                        </div> -->
+                        </div>
 
                         <div id="slider">
                             <!-- <p class="container__desc">What's hot</p> -->
@@ -226,6 +244,8 @@
                     </div>
                 </div>
             </div>
+
+            <div id="toast"></div>
         </div>
     </div>
 

@@ -40,7 +40,17 @@ body {
 .nav__item {
     line-height: 1.6;
     font-size: 1.6rem;
-    padding: 20px;
+    padding-right: 20px;
+    width: 100%;
+    cursor: pointer;
+}
+
+.nav__item-box {
+    max-width: 250px;
+    height: 100%;
+    display: block;
+    line-height: 65px;
+    padding-left: 20px;
 }
 
 .nav__item-icon {
@@ -48,37 +58,24 @@ body {
 }
 
 .nav__item-link {
-    /* display: block; */
     text-decoration: none;
     font-size: 1.8rem;
     color: #68676a;
     padding-left: 10px;
 }
+
 .nav__item.active {
-    background-color: #000;
-    max-width: 250px;
-    border-radius: 10px;
-    position: relative;
+    border-right: 5px solid #000;
 }
 
-.nav__item.active,
+.nav__item.active .nav__item-box {
+    background-color: #000;
+    border-radius: 15px;
+}
+
+.nav__item.active .nav__item-icon,
 .nav__item.active .nav__item-link {
     color: #fff;
-    /* position: relative; */
-}
-
-.nav__item.active::after {
-    position: absolute;
-    content: "";
-    display: block;
-    width: 5px;
-    height: 100%;
-    background-color: #000;
-    right: -50px;
-    top: 0;
-    bottom: 0;
-    border-radius: 15px;
-    display: none;
 }
 
 
@@ -174,7 +171,7 @@ body {
 #playlist .song.active {
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 3px #dbdbdb;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, .08);
 }
 
 #playlist .song:active {
@@ -189,6 +186,9 @@ body {
     min-height: 150px;
     border-radius: 15px;
     padding: 20px 50px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, .08);
+
 }
 
 .control-panel-playlist {
@@ -392,4 +392,87 @@ body {
 
 .fav-artist i {
     font-size: 3rem;
+}
+
+#toast {
+    position: fixed;
+    top: 32px;
+    right: 32px;
+    z-index: 1000;
+}
+
+.toast {
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, .08);
+    min-width: 400px;
+    max-width: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    transition: all linear .25s; 
+    /* This 'transition' make it slide to top smoother */
+}
+
+.toast + .toast {
+    margin-top: 20px;
+}
+
+.toast.toast--success {
+    background-color: #ebfbf5;
+}
+
+.toast.toast--warn {
+    background-color: #fff9ea;
+}
+
+.toast.toast--info {
+    background-color: #e5fafd;
+}
+
+.toast.toast--error {
+    background-color: #fdedee;
+}
+
+.toast__icon {
+    font-size: 3rem;
+    margin-right: 20px;
+}
+
+.toast.toast--success .toast__icon {
+    color: #35d39d;
+}
+
+.toast.toast--warn .toast__icon {
+    color: #ffc12e;
+}
+
+.toast.toast--info .toast__icon {
+    color: #00d0ea;
+}
+
+.toast.toast--error .toast__icon {
+    color: #ef4d61;
+}
+
+.toast__body {
+    flex: 1;
+}
+
+.toast__title {
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+}
+
+.toast__msg {
+    font-size: 1.6rem;
+    line-height: 1.4;
+}
+
+.toast__close {
+    font-size: 2.4rem;
+    margin-left: 20px;
+    color: #ccc;
+    cursor: pointer;
 }

@@ -4,9 +4,14 @@
         padding: 0;
     }
 
-    .nav__item.active::after {
-        display: none;
+    .nav__item {
+        padding-right: 0;
     }
+
+    .nav__item.active {
+        border: none;
+    }
+
 }
 
 /* Tablet & Mobile */
@@ -26,10 +31,17 @@
     #nav {
         padding: 0;
     }
+    
+    .nav__item {
+        padding-right: 0;
+    }
+    
+    .nav__item.active {
+        border: none;
+    }
 
     .nav__list-tile,
-    .nav__item-link,
-    .nav__item.active::after {
+    .nav__item-link {
         display: none;
     }
 }

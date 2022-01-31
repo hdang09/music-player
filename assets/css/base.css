@@ -12,7 +12,25 @@
     line-height: initial;
     box-sizing: border-box;
     font-family: 'Helvetica', 'Arial', sans-serif;
+    -webkit-tap-highlight-color: transparent;
     /* font-family: 'Poppins', 'Helvetica', 'Arial', sans-serif; */
+}
+
+@keyframes wipeIn {
+    from {
+        opacity: 0;
+        transform: translateX(calc(100% + 32px));
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+    }
 }
 
 body {
