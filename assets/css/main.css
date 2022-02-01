@@ -7,7 +7,7 @@
 #main {
     background-color: var(--background-color);
     display: flex;
-    /* overflow: ; */
+    overflow-x: hidden;
 }
 /* Navigation bar */
 #nav {
@@ -25,12 +25,14 @@
 }
 
 .nav__logo-link {
-
+    display: block;
+    height: 100%;
 }
 
 .nav__logo-menu {
     font-size: 3rem;
     margin-right: 30px;
+    cursor: pointer;    
 }
 
 .nav__list-title {
@@ -170,6 +172,20 @@
     color: var(--secondary-text-color);
 }
 
+.song-list {
+    max-height: 20vh;
+    overflow: auto;
+}
+
+.song-list::-webkit-scrollbar {
+    width: 5px;
+}
+
+.song-list::-webkit-scrollbar-thumb {
+    border-radius: 20px;
+    background: var(--secondary-text-color); 
+}
+
 .playlist__label {
     font-size: 1.8rem;
     padding: 15px 0;
@@ -177,6 +193,7 @@
 }
 
 #playlist .song {
+    width: 100%;
     cursor: pointer;
 }
 
@@ -198,7 +215,6 @@
     min-height: 150px;
     border-radius: 15px;
     padding: 20px 50px;
-    margin-bottom: 30px;
     box-shadow: 0 5px 8px rgba(0, 0, 0, .08);
 
 }
@@ -219,7 +235,7 @@
 }
 
 .panel-playlist__name {
-    font-size: 4rem;
+    font-size: 3.6rem;
 }
 
 .panel-playlist__artist {
@@ -356,17 +372,27 @@
     margin-bottom: 20px;
 }   
 
-.shortcuts-tag {
+
+.shortcuts-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    /* box-sizing: border-box; */
+}
+
+.shortcuts-item {
+    /* min-width: 40%; */
     --height: 50px;
     background-color: #fff;
     border-radius: 10px;
-    width: 200px;
+    min-width: 200px;
     height: var(--height);
     line-height: 30px;
     font-size: 2rem;
     padding: 10px;
     box-sizing: border-box;
-    margin-bottom: 10px;
+    margin: 10px;
+    font-weight: 600;
 }
 
 /* Favourite Artists */

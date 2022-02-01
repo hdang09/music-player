@@ -51,12 +51,21 @@
 /* Mobile */
 @media (max-width: 46.1875em) {
     #main {
-        padding: 15px;
+        padding: 20px;
         margin-bottom: 300px !important;
+        display: block;
     }
 
     #nav {
         display: none;
+    }
+
+    #container {
+        padding-left: 0;
+    }
+
+    .song-list {
+        max-height: 100%;
     }
 
     #control-panel {
@@ -65,6 +74,7 @@
         bottom: 0;
         left: 0;
         right: 0;
+        margin-bottom: 0;
     }
 
     .panel__left,

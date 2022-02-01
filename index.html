@@ -69,7 +69,7 @@
                     </div>
                 </li>
 
-                <li onclick="showWarningToast()" class="nav__item">
+                <li onclick="showSuccessToast()" class="nav__item">
                     <div class="nav__item-box">
                         <i class="nav__item-icon fas fa-ticket-alt"></i>
                         <a href="#" class="nav__item-link">Events</a>
@@ -77,7 +77,7 @@
                 </li>
     
                 <h2 class="nav__list-title">Your Collection</h2>
-                <li onclick="showWarningToast()" class="nav__item">
+                <li onclick="showInfoToast()" class="nav__item">
                     <div class="nav__item-box">
                         <i class="nav__item-icon fas fa-heart"></i>
                         <a href="#" class="nav__item-link">Favorite Songs</a>
@@ -91,7 +91,7 @@
                     </div>
                 </li>
 
-                <li onclick="showWarningToast()" class="nav__item">
+                <li onclick="showErrorToast()" class="nav__item">
                     <div class="nav__item-box">
                         <i class="nav__item-icon fas fa-star"></i>
                         <a href="#" class="nav__item-link">Albums</a>
@@ -103,9 +103,9 @@
         <div id="container">
             <div class="grid row">
                 <div class="col l-9 m-9 c-12">
-                    <div class="flex-c">
+                    <!-- <div class="flex-c">
                         <input id="search" type="text" placeholder="Search for artists, songs, albums, ...">
-                    </div>
+                    </div> -->
     
                     <div id="slider">
                         <!-- <p class="container__desc">What's hot</p> -->
@@ -121,31 +121,42 @@
                     </div>
     
                     <div id="playlist">
-                        
+                        <h1 class="container__title">My Playlist</h1>
+                        <div class="row">
+                            <div class="playlist__title col l-1 m-1 c-1">#</div>
+                            <div class="playlist__title col l-5 m-5 c-5">TITLE</div>
+                            <div class="playlist__title col l-3 m-3 c-4">ARTIST</div>
+                            <div class="playlist__title col l-1 m-1 c-2">TIME</div>
+                            <div class="playlist__title col l-2 m-2 c-0">ALBUM</div>
+                        </div>
+
+                        <ul class="song-list">
+
+                        </ul>
     
-                        <!-- <div class="row song">
+                        <!-- <li class="row song">
                             <div class="playlist__label col l-1 m-1 c-1">01</div>
                             <div class="playlist__label col l-4 m-4 c-5">Priority</div>
                             <div class="playlist__label col l-3 m-3 c-4">Mos Def</div>
                             <div class="playlist__label col l-1 m-1 c-2">1:25</div>
                             <div class="playlist__label col l-3 m-3 c-0">The Ecstatic</div>
-                        </div>
+                        </li>
     
-                        <div class="row song">
+                        <li class="row song">
                             <div class="playlist__label col l-1 m-1 c-1">02</div>
                             <div class="playlist__label col l-4 m-4 c-5">Time Is Ticking Out</div>
                             <div class="playlist__label col l-3 m-3 c-4">The Cranberries</div>
                             <div class="playlist__label col l-1 m-1 c-2">2:59</div>
                             <div class="playlist__label col l-3 m-3 c-0">Wake Up and Smell</div>
-                        </div>
+                        </li>
     
-                        <div class="row song">
+                        <li class="row song">
                             <div class="playlist__label col l-1 m-1 c-1">03</div>
                             <div class="playlist__label col l-4 m-4 c-5">One Minute More</div>
                             <div class="playlist__label col l-3 m-3 c-4">Capital Cities</div>
                             <div class="playlist__label col l-1 m-1 c-2">3:23</div>
                             <div class="playlist__label col l-3 m-3 c-0">In A Tidal Wave</div>
-                        </div> -->
+                        </li> -->
                     </div>
     
                     <div id="control-panel">
@@ -193,7 +204,7 @@
                     </div>
                 </div>
     
-                <div id="sidebar" class="col l-3 m-3 c-0">
+                <div id="sidebar" class="col l-3 m-3 c-12">
                     <div id="header">
                         <div class="header-search"></div>
                     </div>
@@ -201,10 +212,12 @@
                     <div id="shortcuts">
                         <h2 class="shortcuts-title">Shortcuts</h2>
     
-                        <h2 class="shortcuts-tag">Chill Hits</h2>
-                        <h2 class="shortcuts-tag">Hop</h2>
-                        <h2 class="shortcuts-tag">Accoustic</h2>
-                        <h2 class="shortcuts-tag">Jazz</h2>
+                        <ul class="shortcuts-list">
+                            <li class="shortcuts-item">Chill Hits</li>
+                            <li class="shortcuts-item">Hop</li>
+                            <li class="shortcuts-item">Accoustic</li>
+                            <li class="shortcuts-item">Jazz</li>
+                        </ul>
                     </div>
     
                     <div id="fav">

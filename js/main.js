@@ -3,6 +3,7 @@ const $$ = document.querySelectorAll.bind(document);
 
 const PLAYER_STORAGE_KEY = 'Bee_Music';
 
+const songList = $('.song-list')
 const cd = $('.panel-playlist__cd');
 const cdSize = cd.offsetWidth;
 const audio = $('.audio');
@@ -87,28 +88,18 @@ const app = {
     },
 
     renderSongs: function() {
-        const htmlContainer = this.songs.map((song, index) => {
+        const htmls = this.songs.map((song, index) => {
             return `
-                <div class="row song ${index === currentIndex ? 'active' : ''}" data-index="${index}">
+                <li class="row song ${index === currentIndex ? 'active' : ''}" data-index="${index}">
                     <div class="playlist__label col l-1 m-1 c-1">${index + 1}</div>
                     <div class="playlist__label col l-5 m-5 c-5">${song.name}</div>
                     <div class="playlist__label col l-3 m-3 c-4">${song.singer}</div>
                     <div class="playlist__label col l-1 m-1 c-2">1:25</div>
                     <div class="playlist__label col l-2 m-2 c-0">m-tp M-TP</div>
-                </div>
+                </li>
             `
         })
-        var htmlsContainer = `
-            <h1 class="container__title">My Playlist</h1>
-            <div class="row">
-                <div class="playlist__title col l-1 m-1 c-1">#</div>
-                <div class="playlist__title col l-5 m-5 c-5">TITLE</div>
-                <div class="playlist__title col l-3 m-3 c-4">ARTIST</div>
-                <div class="playlist__title col l-1 m-1 c-2">TIME</div>
-                <div class="playlist__title col l-2 m-2 c-0">ALBUM</div>
-            </div>
-        ` + htmlContainer.join('');
-        document.getElementById('playlist').innerHTML = htmlsContainer;
+        songList.innerHTML = htmls;
     },
 
     handleEvents: function() {
