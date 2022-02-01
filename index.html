@@ -23,230 +23,236 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class="grid">
-        <div class="row">
-            <div class="col l-3 m-1 c-0">
-                <div id="nav">
-                    <div id="logo">
-                        <a href="" class="nav__logo-link"></a>
-                    </div>
-                    <!-- <i class="fas fa-bars"></i> -->
-                    <ul class="nav__list">
-                        <li class="nav__item active">
-                            <div class="nav__item-box">
-                                <i class="nav__item-icon fas fa-home"></i>
-                                <a href="#" class="nav__item-link">Home</a>
-                            </div>
-                        </li>
-                        <li onclick="showSuccessToast()" class="nav__item">
-                            <div class="nav__item-box">
-                                <i class="nav__item-icon fas fa-comment-dots"></i>
-                                <a href="#" class="nav__item-link">Trends</a>
-                            </div>
-                        </li>
-                        <li onclick="showInfoToast()" class="nav__item">
-                            <div class="nav__item-box">
-                                <i class="nav__item-icon fas fa-compass"></i>
-                                <a href="#" class="nav__item-link">Feed</a>
-                            </div>
-                        </li>
-
-                        <h2 class="nav__list-tile">Discover</h2>
-                        <li onclick="showWarningToast()" class="nav__item">
-                            <div class="nav__item-box">
-                                <i class="nav__item-icon fas fa-th-large"></i>
-                                <a href="#" class="nav__item-link">New and Notable</a>
-                            </div>
-                        </li>
-                        <li onclick="showErrorToast()" class="nav__item">
-                            <div class="nav__item-box">
-                                <i class="nav__item-icon far fa-calendar"></i>
-                                <a href="#" class="nav__item-link">Release Calendar</a>
-                            </div>
-                        </li>
-                        <li onclick="showWarningToast()" class="nav__item">
-                            <div class="nav__item-box">
-                                <i class="nav__item-icon fas fa-ticket-alt"></i>
-                                <a href="#" class="nav__item-link">Events</a>
-                            </div>
-                        </li>
-
-                        <h2 class="nav__list-tile">Your Collection</h2>
-                        <li onclick="showWarningToast()" class="nav__item">
-                            <div class="nav__item-box">
-                                <i class="nav__item-icon fas fa-heart"></i>
-                                <a href="#" class="nav__item-link">Favorite Songs</a>
-                            </div>
-                        </li>
-                        <li onclick="showWarningToast()" class="nav__item">
-                            <div class="nav__item-box">
-                                <i class="nav__item-icon fas fa-users"></i>
-                                <a href="#" class="nav__item-link">Artists</a>
-                            </div>
-                        </li>
-                        <li onclick="showWarningToast()" class="nav__item">
-                            <div class="nav__item-box">
-                                <i class="nav__item-icon fas fa-star"></i>
-                                <a href="#" class="nav__item-link">Albums</a>
-                            </div>
-                        </li>
-                    </ul>
+    <div id="main">
+        <div id="nav">
+           <header class="flex-b">
+                <div class="nav__logo">
+                    <a href="" class="nav__logo-link"></a>
                 </div>
-            </div>
+                <i class="nav__logo-menu fas fa-bars"></i>
+           </header>
 
-            <div id="container" class="col l-9 m-11 c-12">
-                <div class="row">
-                    <div class="col l-9 m-9 c-12">
-                        <div class="flex-c">
-                            <input id="search" type="text" placeholder="Search for artists, songs, albums, ...">
-                        </div>
-
-                        <div id="slider">
-                            <!-- <p class="container__desc">What's hot</p> -->
-                            <h1 class="container__title">Trending</h1>
-                            <div class="slider__img">
-                                <p class="slider__img-intro">Artist</p>
-                                <h2 class="slider__img-title">On Top <br> Of The World</h2>
-                                <div class="slider__viewer">
-                                    <p class="slider__viewer-title">Monthly Listener</p>
-                                    <p class="slider__viewer-number">32.092</p>
-                                </div>
-                            </div>
-                        </div>
-        
-                        <div id="playlist">
-                            
-
-                            <!-- <div class="row song">
-                                <div class="playlist__label col l-1 m-1 c-1">01</div>
-                                <div class="playlist__label col l-4 m-4 c-5">Priority</div>
-                                <div class="playlist__label col l-3 m-3 c-4">Mos Def</div>
-                                <div class="playlist__label col l-1 m-1 c-2">1:25</div>
-                                <div class="playlist__label col l-3 m-3 c-0">The Ecstatic</div>
-                            </div>
-
-                            <div class="row song">
-                                <div class="playlist__label col l-1 m-1 c-1">02</div>
-                                <div class="playlist__label col l-4 m-4 c-5">Time Is Ticking Out</div>
-                                <div class="playlist__label col l-3 m-3 c-4">The Cranberries</div>
-                                <div class="playlist__label col l-1 m-1 c-2">2:59</div>
-                                <div class="playlist__label col l-3 m-3 c-0">Wake Up and Smell</div>
-                            </div>
-
-                            <div class="row song">
-                                <div class="playlist__label col l-1 m-1 c-1">03</div>
-                                <div class="playlist__label col l-4 m-4 c-5">One Minute More</div>
-                                <div class="playlist__label col l-3 m-3 c-4">Capital Cities</div>
-                                <div class="playlist__label col l-1 m-1 c-2">3:23</div>
-                                <div class="playlist__label col l-3 m-3 c-0">In A Tidal Wave</div>
-                            </div> -->
-                        </div>
-        
-                        <div id="control-panel">
-                            <div class="control-panel-playlist">
-                                <div style="background-image: url('./img/playlist/img1.jpg');" class="panel-playlist__cd flex-c"></div>
-                                <h1 class="panel-playlist__name">Chạy Ngay Đi</h1>
-                                <p class="panel-playlist__artist">Sơn Tùng M-TP</p>
-                            </div>
-                            <div class="control-panel-nav">
-                                <div class="panel__left">
-                                    <i class="panel__left-icon fas fa-heart"></i>
-                                    <i class="panel__left-icon fas fa-music"></i>
-                                    <i class="panel__left-icon fas fa-expand-alt"></i>
-                                </div>
-    
-                                <div class="panel__center flex-c">
-                                    <i class="panel__center-icon fas fa-redo-alt"></i>
-                                    <i class="panel__center-icon fas fa-fast-backward"></i>
-                                    <div class="panel__center-toggle">
-                                        <i class="panel__center-icon fas fa-pause-circle"></i>
-                                        <i class="panel__center-icon fas fa-play-circle"></i>
-                                    </div>
-                                    <i class="panel__center-icon fas fa-fast-forward"></i>
-                                    <i class="panel__center-icon fas fa-random"></i>
-                                </div>
-    
-                                <div class="panel__right">
-                                    <i class="fas fa-volume-down"></i>
-                                    <input id="progress" class="panel__right-vol-bar" type="range" value="0" step="1" min="0" max="100">
-                                    <!-- <div class="panel__right-vol-bar"></div> -->
-                                    <i class="fas fa-volume-up"></i>
-                                </div>
-                            </div>
-
-                            <div class="control-panel-time">
-                                <span class="panel-time__duration">00:00</span>
-                                <input id="progress" class="panel-time_bar" type="range" value="0" step="1" min="0" max="100">
-                                <!-- <div class="panel-time_bar">
-                                    <i draggable="true" class="panel-time_bar-ball fas fa-dot-circle"></i>
-                                </div> -->
-                                <span class="panel-length">02:59</span>
-                            </div>
-
-                            <audio src="" class="audio"></audio>
-                        </div>
+            <ul class="nav__list">
+                <li class="nav__item active">
+                    <div class="nav__item-box">
+                        <i class="nav__item-icon fas fa-home"></i>
+                        <a href="#" class="nav__item-link">Home</a>
                     </div>
-        
-                    <div id="sidebar" class="col l-3 m-3 c-0">
-                        <div id="header">
+                </li>
 
-                            <div class="header-search"></div>
-                        </div>
-        
-                        <div id="shortcuts">
-                            <h2 class="shortcuts-title">Shortcuts</h2>
-
-                            <h2 class="shortcuts-tag">Chill Hits</h2>
-                            <h2 class="shortcuts-tag">Hop</h2>
-                            <h2 class="shortcuts-tag">Accoustic</h2>
-                            <h2 class="shortcuts-tag">Jazz</h2>
-                        </div>
-        
-                        <div id="fav">
-                            <h2 class="fav-title">Favorite Artist</h2>
-
-                            <div class="fav-artist">
-                                <div class="fav-artist-info">
-                                    <div class="fav-artist-img" style="background: url(./img/sidebar/mtp.jfif) no-repeat center / contain;"></div>
-                                    <h3 class="fav-artist-info-name">Son Tung M-TP</h3>
-                                    <p class="fav-artist-info-desc">196 songs in library</p>
-                                </div>
-                                <i class="fas fa-ellipsis-h"></i>
-                            </div>
-
-                            <div class="fav-artist">
-                                <div class="fav-artist-info">
-                                    <div class="fav-artist-img" style="background: url(./img/sidebar/mtp.jfif) no-repeat center / contain;"></div>
-                                    <h3 class="fav-artist-info-name">Son Tung M-TP</h3>
-                                    <p class="fav-artist-info-desc">196 songs in library</p>
-                                </div>
-                                <i class="fas fa-ellipsis-h"></i>
-                            </div>
-
-                            <div class="fav-artist">
-                                <div class="fav-artist-info">
-                                    <div class="fav-artist-img" style="background: url(./img/sidebar/mtp.jfif) no-repeat center / contain;"></div>
-                                    <h3 class="fav-artist-info-name">Son Tung M-TP</h3>
-                                    <p class="fav-artist-info-desc">196 songs in library</p>
-                                </div>
-                                <i class="fas fa-ellipsis-h"></i>
-                            </div>
-
-                            <div class="fav-artist">
-                                <div class="fav-artist-info">
-                                    <div class="fav-artist-img" style="background: url(./img/sidebar/mtp.jfif) no-repeat center / contain;"></div>
-                                    <h3 class="fav-artist-info-name">Son Tung M-TP</h3>
-                                    <p class="fav-artist-info-desc">196 songs in library</p>
-                                </div>
-                                <i class="fas fa-ellipsis-h"></i>
-                            </div>
-                        </div>
+                <li onclick="showSuccessToast()" class="nav__item">
+                    <div class="nav__item-box">
+                        <i class="nav__item-icon fas fa-comment-dots"></i>
+                        <a href="#" class="nav__item-link">Trends</a>
                     </div>
-                </div>
-            </div>
+                </li>
 
-            <div id="toast"></div>
+                <li onclick="showInfoToast()" class="nav__item">
+                    <div class="nav__item-box">
+                        <i class="nav__item-icon fas fa-compass"></i>
+                        <a href="#" class="nav__item-link">Feed</a>
+                    </div>
+                </li>
+    
+                <h2 class="nav__list-title">Discover</h2>
+                <li onclick="showWarningToast()" class="nav__item">
+                    <div class="nav__item-box">
+                        <i class="nav__item-icon fas fa-th-large"></i>
+                        <a href="#" class="nav__item-link">New and Notable</a>
+                    </div>
+                </li>
+
+                <li onclick="showErrorToast()" class="nav__item">
+                    <div class="nav__item-box">
+                        <i class="nav__item-icon far fa-calendar"></i>
+                        <a href="#" class="nav__item-link">Release Calendar</a>
+                    </div>
+                </li>
+
+                <li onclick="showWarningToast()" class="nav__item">
+                    <div class="nav__item-box">
+                        <i class="nav__item-icon fas fa-ticket-alt"></i>
+                        <a href="#" class="nav__item-link">Events</a>
+                    </div>
+                </li>
+    
+                <h2 class="nav__list-title">Your Collection</h2>
+                <li onclick="showWarningToast()" class="nav__item">
+                    <div class="nav__item-box">
+                        <i class="nav__item-icon fas fa-heart"></i>
+                        <a href="#" class="nav__item-link">Favorite Songs</a>
+                    </div>
+                </li>
+
+                <li onclick="showWarningToast()" class="nav__item">
+                    <div class="nav__item-box">
+                        <i class="nav__item-icon fas fa-users"></i>
+                        <a href="#" class="nav__item-link">Artists</a>
+                    </div>
+                </li>
+
+                <li onclick="showWarningToast()" class="nav__item">
+                    <div class="nav__item-box">
+                        <i class="nav__item-icon fas fa-star"></i>
+                        <a href="#" class="nav__item-link">Albums</a>
+                    </div>
+                </li>
+            </ul>
         </div>
+    
+        <div id="container">
+            <div class="grid row">
+                <div class="col l-9 m-9 c-12">
+                    <div class="flex-c">
+                        <input id="search" type="text" placeholder="Search for artists, songs, albums, ...">
+                    </div>
+    
+                    <div id="slider">
+                        <!-- <p class="container__desc">What's hot</p> -->
+                        <h1 class="container__title">Trending</h1>
+                        <div class="slider__img">
+                            <p class="slider__img-intro">Artist</p>
+                            <h2 class="slider__img-title">On Top <br> Of The World</h2>
+                            <div class="slider__viewer">
+                                <p class="slider__viewer-title">Monthly Listener</p>
+                                <p class="slider__viewer-number">32.092</p>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div id="playlist">
+                        
+    
+                        <!-- <div class="row song">
+                            <div class="playlist__label col l-1 m-1 c-1">01</div>
+                            <div class="playlist__label col l-4 m-4 c-5">Priority</div>
+                            <div class="playlist__label col l-3 m-3 c-4">Mos Def</div>
+                            <div class="playlist__label col l-1 m-1 c-2">1:25</div>
+                            <div class="playlist__label col l-3 m-3 c-0">The Ecstatic</div>
+                        </div>
+    
+                        <div class="row song">
+                            <div class="playlist__label col l-1 m-1 c-1">02</div>
+                            <div class="playlist__label col l-4 m-4 c-5">Time Is Ticking Out</div>
+                            <div class="playlist__label col l-3 m-3 c-4">The Cranberries</div>
+                            <div class="playlist__label col l-1 m-1 c-2">2:59</div>
+                            <div class="playlist__label col l-3 m-3 c-0">Wake Up and Smell</div>
+                        </div>
+    
+                        <div class="row song">
+                            <div class="playlist__label col l-1 m-1 c-1">03</div>
+                            <div class="playlist__label col l-4 m-4 c-5">One Minute More</div>
+                            <div class="playlist__label col l-3 m-3 c-4">Capital Cities</div>
+                            <div class="playlist__label col l-1 m-1 c-2">3:23</div>
+                            <div class="playlist__label col l-3 m-3 c-0">In A Tidal Wave</div>
+                        </div> -->
+                    </div>
+    
+                    <div id="control-panel">
+                        <div class="control-panel-playlist">
+                            <div style="background-image: url('./img/playlist/img1.jpg');" class="panel-playlist__cd flex-c"></div>
+                            <h1 class="panel-playlist__name">Chạy Ngay Đi</h1>
+                            <p class="panel-playlist__artist">Sơn Tùng M-TP</p>
+                        </div>
+                        <div class="control-panel-nav">
+                            <div class="panel__left">
+                                <i class="panel__left-icon fas fa-heart"></i>
+                                <i class="panel__left-icon fas fa-music"></i>
+                                <i class="panel__left-icon fas fa-expand-alt"></i>
+                            </div>
+    
+                            <div class="panel__center flex-c">
+                                <i class="panel__center-icon fas fa-redo-alt"></i>
+                                <i class="panel__center-icon fas fa-fast-backward"></i>
+                                <div class="panel__center-toggle">
+                                    <i class="panel__center-icon fas fa-pause-circle"></i>
+                                    <i class="panel__center-icon fas fa-play-circle"></i>
+                                </div>
+                                <i class="panel__center-icon fas fa-fast-forward"></i>
+                                <i class="panel__center-icon fas fa-random"></i>
+                            </div>
+    
+                            <div class="panel__right">
+                                <i class="fas fa-volume-down"></i>
+                                <input id="progress" class="panel__right-vol-bar" type="range" value="0" step="1" min="0" max="100">
+                                <!-- <div class="panel__right-vol-bar"></div> -->
+                                <i class="fas fa-volume-up"></i>
+                            </div>
+                        </div>
+    
+                        <div class="control-panel-time">
+                            <span class="panel-time__duration">00:00</span>
+                            <input id="progress" class="panel-time_bar" type="range" value="0" step="1" min="0" max="100">
+                            <!-- <div class="panel-time_bar">
+                                <i draggable="true" class="panel-time_bar-ball fas fa-dot-circle"></i>
+                            </div> -->
+                            <span class="panel-length">02:59</span>
+                        </div>
+    
+                        <audio src="" class="audio"></audio>
+                    </div>
+                </div>
+    
+                <div id="sidebar" class="col l-3 m-3 c-0">
+                    <div id="header">
+                        <div class="header-search"></div>
+                    </div>
+    
+                    <div id="shortcuts">
+                        <h2 class="shortcuts-title">Shortcuts</h2>
+    
+                        <h2 class="shortcuts-tag">Chill Hits</h2>
+                        <h2 class="shortcuts-tag">Hop</h2>
+                        <h2 class="shortcuts-tag">Accoustic</h2>
+                        <h2 class="shortcuts-tag">Jazz</h2>
+                    </div>
+    
+                    <div id="fav">
+                        <h2 class="fav-title">Favorite Artist</h2>
+    
+                        <div class="fav-artist">
+                            <div class="fav-artist-info">
+                                <div class="fav-artist-img" style="background: url(./img/sidebar/mtp.jfif) no-repeat center / contain;"></div>
+                                <h3 class="fav-artist-info-name">Son Tung M-TP</h3>
+                                <p class="fav-artist-info-desc">196 songs in library</p>
+                            </div>
+                            <i class="fas fa-ellipsis-h"></i>
+                        </div>
+    
+                        <div class="fav-artist">
+                            <div class="fav-artist-info">
+                                <div class="fav-artist-img" style="background: url(./img/sidebar/mtp.jfif) no-repeat center / contain;"></div>
+                                <h3 class="fav-artist-info-name">Son Tung M-TP</h3>
+                                <p class="fav-artist-info-desc">196 songs in library</p>
+                            </div>
+                            <i class="fas fa-ellipsis-h"></i>
+                        </div>
+    
+                        <div class="fav-artist">
+                            <div class="fav-artist-info">
+                                <div class="fav-artist-img" style="background: url(./img/sidebar/mtp.jfif) no-repeat center / contain;"></div>
+                                <h3 class="fav-artist-info-name">Son Tung M-TP</h3>
+                                <p class="fav-artist-info-desc">196 songs in library</p>
+                            </div>
+                            <i class="fas fa-ellipsis-h"></i>
+                        </div>
+    
+                        <div class="fav-artist">
+                            <div class="fav-artist-info">
+                                <div class="fav-artist-img" style="background: url(./img/sidebar/mtp.jfif) no-repeat center / contain;"></div>
+                                <h3 class="fav-artist-info-name">Son Tung M-TP</h3>
+                                <p class="fav-artist-info-desc">196 songs in library</p>
+                            </div>
+                            <i class="fas fa-ellipsis-h"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast">
+
     </div>
 
     <script src="./js/main.js"></script>

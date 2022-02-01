@@ -33,32 +33,33 @@
     }
 }
 
-body {
-    overflow-x: hidden;
-}
-
 .flex-a {
     display: flex;
+    align-items: center;    
     justify-content: space-around;
 }
 
 .flex-b {
     display: flex;
+    align-items: center;    
     justify-content: space-between;
+
 }
 
 .flex-c {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 }
 
 .flex-e {
     display: flex;
+    align-items: center;    
     justify-content: space-evenly;
 }
 
 .flex-r {
     display: flex;
+    align-items: center;    
     flex-wrap: wrap-reverse;
 }
