@@ -30,13 +30,13 @@ var isClickShrinkBtn = false;
 
 /*
 1. Render songs ==> OK
-2. Scroll top 
+2. Scroll top ==> OK
 3. Play / pause / seek ==> OK
 4. CD rotate
 5. Next / prev ==> OK
 6. Random ==> OK
 7. Next / Repeat when ended ==> OK
-8. Active song ==> OK
+8. Active song (songName, artist)
 9. Scroll active song into view ==> OK
 10. Play song when click
 */
