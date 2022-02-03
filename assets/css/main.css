@@ -1,5 +1,5 @@
 @media (min-width: 64em) {
-    .control-panel-playlist {
+    .panel-playlist {
         display: none;
     }
 }
@@ -166,6 +166,10 @@
     margin-bottom: 10px;
 }
 
+#playlist .song {
+    margin: 0;
+}
+
 .playlist__title {
     font-size: 1.6rem;
     padding: 10px 0;    
@@ -216,11 +220,22 @@
     border-radius: 15px;
     padding: 20px 50px;
     box-shadow: 0 5px 8px rgba(0, 0, 0, .08);
-
 }
 
-.control-panel-playlist {
+.shrink-btn {
+    width: 75px;
+    height: 5px;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 30px;
+    display: none;
+}
 
+.panel-playlist {
+    margin-right: auto;
 }
 
 .panel-playlist__cd {
@@ -243,61 +258,70 @@
     margin-bottom: 20px;
 }
 
+.panel-player {
+    display: block;
+}
 
-.control-panel-nav {
+.panel-nav {
+    width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.panel__left {
+.panel-left {
     font-size: 3rem;
 }
 
-.panel__left-icon {
+.panel-left__icon {
     padding: 5px;
     background-color: var(--background-color);
     border-radius: 5px;
     cursor: pointer;
 }
 
-.panel__left-icon:hover {
+.panel-left__icon:hover {
     color: var(--primary-color);
 }
 
-.panel__center-icon {
+.panel-center__icon {
     font-size: 2rem;
     margin: 10px 15px;
     cursor: pointer;
 }
 
-.panel__center i.active {
+.panel-center i.active {
     color: var(--primary-color);
 }
 
-.panel__center-toggle i {
+.panel-center__toggle i {
     font-size: 5rem;
     margin: 0 10px;
 }
 
-/* Pause */
-.panel__center-toggle .fa-pause-circle {
+
+.panel-center__toggle.mobile {
     display: none;
 }
 
-.panel__center-toggle .fa-play-circle {
+/* Pause */
+.panel-center__toggle .fa-pause-circle {
+    display: none;
+}
+
+.panel-center__toggle .fa-play-circle {
     display: block;
 }
 
 /* Playing */
-.panel__center-toggle.playing .fa-pause-circle {
+.panel-center__toggle.playing .fa-pause-circle {
     display: block;
 }
 
-.panel__center-toggle.playing .fa-play-circle {
+.panel-center__toggle.playing .fa-play-circle {
     display: none;
 }
 
-.panel__right-vol-bar {
+.panel-right__vol-bar {
     width: 75px;
     height: 3px;
     background-color: var(--secondary-text-color);
@@ -306,21 +330,25 @@
     margin: 0 5px;
 }
 
-.panel__right {
+.panel-right {
     font-size: 3rem;
 }
 
-.control-panel-time {
+.panel-time {
+    width: 100%;
     margin-top: 30px;
     display: flex;
 }
 
-.panel-time__duration,
-.panel-length {
+.panel-time__current, 
+.panel-time__current span,
+.panel-length,
+.panel-length span {
+
     font-size: 1.6rem;
 }
 
-.panel-time_bar {
+.panel-time__bar {
     flex: 1;
     height: 3px;
     background-color: var(--secondary-text-color);
@@ -344,7 +372,6 @@
     position: absolute;
     font-size: 2rem;
     transform: translateY(-40%);
-
 }
 
 /* Header: Search & Account */
@@ -393,6 +420,7 @@
     box-sizing: border-box;
     margin: 10px;
     font-weight: 600;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, .08);
 }
 
 /* Favourite Artists */

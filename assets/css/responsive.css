@@ -42,6 +42,15 @@
     .nav__item-link {
         display: none;
     }
+
+    .panel-left,
+    .panel-right {
+        display: none;
+    }
+
+    .panel-center {
+        margin: auto;
+    }
 }
 
 /* Tablet */
@@ -52,7 +61,7 @@
 @media (max-width: 46.1875em) {
     #main {
         padding: 20px;
-        margin-bottom: 300px !important;
+        margin-bottom: 150px !important;
         display: block;
     }
 
@@ -77,13 +86,13 @@
         margin-bottom: 0;
     }
 
-    .panel__left,
-    .panel__right {
-        display: none;
+    .panel-control {
+        display: flex;
     }
 
-    .panel__center {
-        margin: auto;
+    .panel-time {
+        /* margin-top: 0; */
+        margin-bottom: 30px;
     }
   
 }

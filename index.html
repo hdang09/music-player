@@ -40,14 +40,14 @@
                     </div>
                 </li>
 
-                <li onclick="showSuccessToast()" class="nav__item">
+                <li onclick="showWarningToast()" class="nav__item">
                     <div class="nav__item-box">
                         <i class="nav__item-icon fas fa-comment-dots"></i>
                         <a href="#" class="nav__item-link">Trends</a>
                     </div>
                 </li>
 
-                <li onclick="showInfoToast()" class="nav__item">
+                <li onclick="showWarningToast()" class="nav__item">
                     <div class="nav__item-box">
                         <i class="nav__item-icon fas fa-compass"></i>
                         <a href="#" class="nav__item-link">Feed</a>
@@ -62,14 +62,14 @@
                     </div>
                 </li>
 
-                <li onclick="showErrorToast()" class="nav__item">
+                <li onclick="showWarningToast()" class="nav__item">
                     <div class="nav__item-box">
                         <i class="nav__item-icon far fa-calendar"></i>
                         <a href="#" class="nav__item-link">Release Calendar</a>
                     </div>
                 </li>
 
-                <li onclick="showSuccessToast()" class="nav__item">
+                <li onclick="showWarningToast()" class="nav__item">
                     <div class="nav__item-box">
                         <i class="nav__item-icon fas fa-ticket-alt"></i>
                         <a href="#" class="nav__item-link">Events</a>
@@ -77,7 +77,7 @@
                 </li>
     
                 <h2 class="nav__list-title">Your Collection</h2>
-                <li onclick="showInfoToast()" class="nav__item">
+                <li onclick="showWarningToast()" class="nav__item">
                     <div class="nav__item-box">
                         <i class="nav__item-icon fas fa-heart"></i>
                         <a href="#" class="nav__item-link">Favorite Songs</a>
@@ -91,7 +91,7 @@
                     </div>
                 </li>
 
-                <li onclick="showErrorToast()" class="nav__item">
+                <li onclick="showWarningToast()" class="nav__item">
                     <div class="nav__item-box">
                         <i class="nav__item-icon fas fa-star"></i>
                         <a href="#" class="nav__item-link">Albums</a>
@@ -156,48 +156,59 @@
                             <div class="playlist__label col l-3 m-3 c-4">Capital Cities</div>
                             <div class="playlist__label col l-1 m-1 c-2">3:23</div>
                             <div class="playlist__label col l-3 m-3 c-0">In A Tidal Wave</div>
-                        </li> -->
+                        </li> Hai Dang-->
                     </div>
     
                     <div id="control-panel">
-                        <div class="control-panel-playlist">
+                        <div class="shrink-btn"></div>
+
+                        <div class="panel-playlist">
                             <div style="background-image: url('./img/playlist/img1.jpg');" class="panel-playlist__cd flex-c"></div>
-                            <h1 class="panel-playlist__name">Chạy Ngay Đi</h1>
-                            <p class="panel-playlist__artist">Sơn Tùng M-TP</p>
-                        </div>
-                        <div class="control-panel-nav">
-                            <div class="panel__left">
-                                <i class="panel__left-icon fas fa-heart"></i>
-                                <i class="panel__left-icon fas fa-music"></i>
-                                <i class="panel__left-icon fas fa-expand-alt"></i>
+                            <div>
+                                <h1 class="panel-playlist__name">Chạy Ngay Đi</h1>
+                                <p class="panel-playlist__artist">Sơn Tùng M-TP</p>
                             </div>
-    
-                            <div class="panel__center flex-c">
-                                <i class="panel__center-icon fas fa-redo-alt"></i>
-                                <i class="panel__center-icon fas fa-fast-backward"></i>
-                                <div class="panel__center-toggle">
-                                    <i class="panel__center-icon fas fa-pause-circle"></i>
-                                    <i class="panel__center-icon fas fa-play-circle"></i>
+                        </div>
+
+                        <div class="panel-player flex-r">
+                            <div class="panel-nav">
+                                <div class="panel-left">
+                                    <i class="panel-left__icon fas fa-heart" title="Save to Your Library"></i>
+                                    <i class="panel-left__icon fas fa-music"></i>
+                                    <i class="panel-left__icon fas fa-expand-alt" title="Fullscreen"></i>
                                 </div>
-                                <i class="panel__center-icon fas fa-fast-forward"></i>
-                                <i class="panel__center-icon fas fa-random"></i>
+        
+                                <div class="panel-center flex-c">
+                                    <i class="panel-center__icon fas fa-redo-alt" title="Repeat"></i>
+                                    <i class="panel-center__icon fas fa-fast-backward" title="Previous"></i>
+                                    <div class="panel-center__toggle">
+                                        <i class="panel-center__icon fas fa-pause-circle"></i>
+                                        <i class="panel-center__icon fas fa-play-circle"></i>
+                                    </div>
+                                    <i class="panel-center__icon fas fa-fast-forward" title="Next"></i>
+                                    <i class="panel-center__icon fas fa-random" title="Shuffle"></i>
+                                </div>
+        
+                                <div class="panel-right">
+                                    <i class="fas fa-volume-down"></i>
+                                    <input class="panel-right__vol-bar" type="range" value="0" step="1" min="0" max="100">
+                                    <!-- <div class="panel-right__vol-bar"></div> -->
+                                    <i class="fas fa-volume-up"></i>
+                                </div>
                             </div>
-    
-                            <div class="panel__right">
-                                <i class="fas fa-volume-down"></i>
-                                <input id="progress" class="panel__right-vol-bar" type="range" value="0" step="1" min="0" max="100">
-                                <!-- <div class="panel__right-vol-bar"></div> -->
-                                <i class="fas fa-volume-up"></i>
+        
+                            <div class="panel-time">
+                                <div class="panel-time__current">
+                                    <span>00</span>:<span>00</span>
+                                </div>
+                                <input class="panel-time__bar" type="range" value="0" step="1" min="0" max="100">
+                                <!-- <div class="panel-time_bar">
+                                    <i draggable="true" class="panel-time_bar-ball fas fa-dot-circle"></i>
+                                </div> -->
+                                <span class="panel-length">
+                                    <span>00</span>:<span>00</span>
+                                </span>
                             </div>
-                        </div>
-    
-                        <div class="control-panel-time">
-                            <span class="panel-time__duration">00:00</span>
-                            <input id="progress" class="panel-time_bar" type="range" value="0" step="1" min="0" max="100">
-                            <!-- <div class="panel-time_bar">
-                                <i draggable="true" class="panel-time_bar-ball fas fa-dot-circle"></i>
-                            </div> -->
-                            <span class="panel-length">02:59</span>
                         </div>
     
                         <audio src="" class="audio"></audio>

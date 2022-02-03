@@ -1,387 +1,287 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
-const PLAYER_STORAGE_KEY = 'Bee_Music';
-
-const songList = $('.song-list')
 const cd = $('.panel-playlist__cd');
 const cdSize = cd.offsetWidth;
+const songList = $('.song-list');
+const shrinkBtn = $('.shrink-btn');
+const toggleBtn = $('.panel-center__toggle');
+const progressBar = $('.panel-time__bar');
 const audio = $('.audio');
-const titleCtrlPanel =$('.panel-playlist__name');
-const artistCtrlPanel =$('.panel-playlist__artist');
-const toggleBtn = $('.panel__center-toggle');
-const timeBar = $('.panel-time_bar');
-const prevBtn = $('.fa-fast-backward');
-const nextBtn = $('.fa-fast-forward');
-const shuffleBtn = $('.fa-random');
-const repeatBtn = $('.fa-redo-alt');
-const playlist = $('#playlist')
+const currentTimeSong = $('.panel-time__current');
+const lengthSongPanel = $('.panel-length');
+const nextBtn = $('.panel-center__icon.fas.fa-fast-forward');
+const prevBtn = $('.panel-center__icon.fas.fa-fast-backward');
+const playlist = $('#playlist');
+const repeatBtn = $('.panel-center__icon.fas.fa-redo-alt');
+const shuffleBtn = $('.panel-center__icon.fas.fa-random');
+const ctrlPanel = $('#control-panel');
+const panelPlayer = $('.panel-player');
+const songName = $('.panel-playlist__name')
+const artistName = $('.panel-playlist__artist')
+const songNode = $('#playlist .song');
+
 
 var currentIndex = 0;
 var isPlaying = false;
-var isShuffle = false;
 var isRepeat = false;
+var isShuffle = false;
+var isClickShrinkBtn = false;
 
-const app = {
-    songs : [
-        {
-            name: "Chạy Ngay Đi (Onionn Remix)",
-            singer: "Sơn Tùng M-TP",
-            path: "./music/Chạy Ngay Đi (Onionn Remix).mp3",
-            image: "./img/playlist/img1.jpg"
-        },
-        {
-            name: "Chạy Ngay Đi",
-            singer: "Sơn Tùng M-TP",
-            path: "./music/Chạy Ngay Đi.mp3",
-            image: "./img/playlist/img2.jpg"
-        },
-        {
-            name: "Hãy Trao Cho Anh",
-            singer: "Sơn Tùng M-TP",
-            path: "./music/Hãy Trao Cho Anh.mp3",
-            image: "./img/playlist/img3.jpg"
-        },
-        {
-            name: "Muộn Rồi Mà Sao Còn",
-            singer: "Sơn Tùng M-TP",
-            path: "./music/Muộn Rồi Mà Sao Còn.mp3",
-            image: "./img/playlist/img4.jpg"
-        },
-        {
-            name: "Nơi Này Có Anh (Masew Bootleg)",
-            singer: "Sơn Tùng M-TP",
-            path: "./music/Noi-Nay-Co-Anh-Masew-Bootleg-Son-Tung-M-TP-Masew.mp3",
-            image: "./img/playlist/img5.jpg"
-        },
-        {
-            name: "Lạc Trôi (Triple D Remix)",
-            singer: "Sơn Tùng M-TP",
-            path: "./music/Lac-Troi-Triple-D-Remix-Son-Tung-M-TP.mp3",
-            image: "./img/playlist/img6.jpg"
-        }
-    ],
-
-    // config: JSON.parse(localStorage.getItem(PLAYER_STORAGE_KEY)) || {},
-    
-    setConfig: function(key, value) {
-        this.config[key] = value;
-        localStorage.setItem(PLAYER_STORAGE_KEY, JSON.stringify(this.config))
+/*
+1. Render songs ==> OK
+2. Scroll top 
+3. Play / pause / seek ==> OK
+4. CD rotate
+5. Next / prev ==> OK
+6. Random ==> OK
+7. Next / Repeat when ended ==> OK
+8. Active song ==> OK
+9. Scroll active song into view ==> OK
+10. Play song when click
+*/
+songs = [
+    {
+        name: 'Chạy Ngay Đi (Onionn Remix)',
+        singer: 'Sơn Tùng M-TP',
+        image: './img/playlist/img1.jpg',
+        path: './music/Chạy Ngay Đi (Onionn Remix).mp3',
+        album: 'm-tp M-TP'
     },
-
-    loadConfig: function() {
-        this.isShuffle = this.config.isShuffle;
-        this.isRepeat = this.config.isRepeat;
-        // --------- or
-        // Object.assign(this, this.config) // Not recommneded
+    {
+        name: 'Chạy Ngay Đi',
+        singer: 'Sơn Tùng M-TP',
+        image: './img/playlist/img2.jpg',
+        path: './music/Chạy Ngay Đi.mp3',
+        album: 'm-tp M-TP'
     },
-
-    start: function() {
-        // Assign settings from config to app
-        // this.loadConfig()
-
-        this.defineProperties();
-        this.renderSongs();
-        this.handleEvents();
-        this.loadCurrentSong();
-        // this.getCurrentSong();
+    {
+        name: 'Hãy Trao Cho Anh',
+        singer: 'Sơn Tùng M-TP',
+        image: './img/playlist/img3.jpg',
+        path: './music/Hãy Trao Cho Anh.mp3',
+        album: 'm-tp M-TP'
     },
-
-    renderSongs: function() {
-        const htmls = this.songs.map((song, index) => {
-            return `
-                <li class="row song ${index === currentIndex ? 'active' : ''}" data-index="${index}">
-                    <div class="playlist__label col l-1 m-1 c-1">${index + 1}</div>
-                    <div class="playlist__label col l-5 m-5 c-5">${song.name}</div>
-                    <div class="playlist__label col l-3 m-3 c-4">${song.singer}</div>
-                    <div class="playlist__label col l-1 m-1 c-2">1:25</div>
-                    <div class="playlist__label col l-2 m-2 c-0">m-tp M-TP</div>
-                </li>
-            `
-        })
-        songList.innerHTML = htmls;
+    {
+        name: 'Lạc Trôi (Triple D Remix)',
+        singer: 'Sơn Tùng M-TP',
+        image: './img/playlist/img4.jpg',
+        path: './music/Lac-Troi-Triple-D-Remix-Son-Tung-M-TP.mp3',
+        album: 'm-tp M-TP'
     },
-
-    handleEvents: function() {
-        const _this = this;
-        // Handle when scroll to shrik/grod cd
-        document.onscroll = function() {
-            const scrollTop = window.scrollY || document.documentElement.scrollTop;
-            const newCdSize = cdSize - scrollTop;
-            cd.style.width = newCdSize > 0 ? newCdSize + 'px': 0;
-            cd.style.height = newCdSize > 0 ? newCdSize + 'px': 0;
-            cd.style.opacity = newCdSize / cdSize;
-        }
-
-        // Handle when click play btn
-        toggleBtn.onclick = function() {
-            if (_this.isPlaying) {
-                audio.pause();
-                // _this.isPlaying = false;
-            } else {
-                // _this.isPlaying = true
-                audio.play()
-            }
-            // toggleBtn.classList.toggle('playing')
-        }
-
-        // When song is played
-        audio.onplay = function() {
-            _this.isPlaying = true;
-            toggleBtn.classList.add('playing');
-            cdRotate.play()
-        }
-
-        // When song is paused
-        audio.onpause = function() {
-            _this.isPlaying = false;
-            toggleBtn.classList.remove('playing')
-            cdRotate.pause()
-        }
-
-        // When progress bar is changed
-        audio.ontimeupdate = function() {
-            if (audio.duration) {
-                const progress = Math.floor(audio.currentTime / audio.duration * 100);
-                timeBar.value = progress;
-            }
-        }
-
-        // Handle when seek
-        timeBar.onchange = function(e) {
-            const seekTime = e.target.value / 100 * audio.duration;
-            audio.currentTime = seekTime;
-        }
-
-        // Handle when CD roatates
-        const cdRotate = cd.animate([
-            { transform: 'rotate(360deg)'}
-        ], {
-            duration: 10000,
-            iterations: Infinity
-        })
-        cdRotate.pause()
-
-        // When click next button
-        nextBtn.onclick = function() {
-            if (_this.isShuffle) {
-                _this.randomSong();
-            } else {
-                _this.nextSong();
-            }
-            audio.play();
-            _this.renderSongs();
-            // _this.scrollToActiveSong()
-        }
-
-        // When click previous button
-        prevBtn.onclick = function() {
-            if (_this.isShuffle) {
-                _this.randomSong();
-            } else {
-                _this.prevSong();
-            }
-            audio.play();
-            _this.renderSongs();
-        }
-
-        // When click shuffle button
-        shuffleBtn.onclick = function(e) {
-            _this.isShuffle = !_this.isShuffle;
-            e.target.classList.toggle('active');
-            _this.setConfig('isShuffle', _this.isShuffle);
-        }
-
-        // When song is ended
-        audio.onended = function() {
-            if (_this.isRepeat) {
-                audio.play();
-            } else {
-                nextBtn.click()
-            }
-        }
-        // Handle when song is repeated
-        repeatBtn.onclick = function(e) {
-            _this.isRepeat = !_this.isRepeat;
-            e.target.classList.toggle('active');
-            _this.setConfig('isRepeat', _this.isRepeat);
-        }
-
-        // Click song to play
-        playlist.onclick = function(e) {
-            const songElement = e.target.closest('.song:not(.active)');
-            if (
-                songElement 
-                // || e.target.closest('.option')
-                ) {
-                // Handle when click song
-                if (songElement) {
-                    // console.log(songElement.getAttribute('data-index'))
-                    // ---------or
-                    // console.log(songElement.dataset.index)
-                    currentIndex = Number(songElement.dataset.index);
-                    _this.loadCurrentSong()
-                    audio.play();
-                    _this.renderSongs();
-                }
-
-                // Handle when click option button
-                // if (e.target.closest('.option')) {
-
-                // }
-            }
-        }
+    {
+        name: 'Muộn Rồi Mà Sao Còn',
+        singer: 'Sơn Tùng M-TP',
+        image: './img/playlist/img1.jpg',
+        path: './music/Muộn Rồi Mà Sao Còn.mp3',
+        album: 'm-tp M-TP'
     },
-
-    // getCurrentSong: function() {
-    //     return this.songs[currentIndex]
-    // },
-
-    defineProperties: function() {
-        Object.defineProperty(this, 'currentSong', {
-            get: function() {
-                return this.songs[currentIndex]
-            }
-        })
+    {
+        name: 'Nơi Này Có Anh (Masew Bootleg)',
+        singer: 'Sơn Tùng M-TP',
+        image: './img/playlist/img1.jpg',
+        path: './music/Noi-Nay-Co-Anh-Masew-Bootleg-Son-Tung-M-TP-Masew.mp3',
+        album: 'm-tp M-TP'
     },
+]
 
-    loadCurrentSong: function() {
-        titleCtrlPanel.innerText = this.currentSong.name;
-        artistCtrlPanel.innerText = this.currentSong.singer;
-        // cd.style.backgroundImage = `url(${this.currentSong.image.replaceAll('"','')})`;
-        cd.style.backgroundImage = `url(${this.currentSong.image})`;
-        audio.src = this.currentSong.path;
-    },
-
-    nextSong: function() {
-        currentIndex++
-        if (currentIndex >= this.songs.length) {
-            currentIndex = 0
-        }
-        // console.log(this, currentIndex, this.currentIndex)
-        this.loadCurrentSong();
-    },
-
-    prevSong: function() {
-        currentIndex--
-        if (currentIndex < 0) {
-            currentIndex = this.songs.length - 1;
-        }
-        this.loadCurrentSong();
-    },
-    randomSong: function() {
-        let newIndex;
-        do {
-            newIndex = Math.floor(Math.random() * this.songs.length)
-        } while (newIndex === currentIndex)
-        currentIndex = newIndex;
-        this.loadCurrentSong();
-    },
-    scrollToActiveSong: function() {
-        setTimeout(() => {
-            $('#playlist .song.active').scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            })
-        }, 300)
-    }
+function renderSongs() {
+    var htmls = songs.map((song, index) => {
+        return `
+        <li class="row song ${currentIndex === index ? 'active' : ''}">
+            <div class="playlist__label col l-1 m-1 c-1">${++index}</div>
+            <div class="playlist__label col l-5 m-5 c-5">${song.name}</div>
+            <div class="playlist__label col l-3 m-3 c-4">${song.singer}</div>
+            <div class="playlist__label length col l-1 m-1 c-2">2:59</div>
+            <div class="playlist__label col l-2 m-2 c-0">${song.album}</div>
+        </li>
+        `
+    })
+    songList.innerHTML = htmls.join('')
 }
 
-app.start();
 
-
-toast = function({
-    title = '', 
-    message = '', 
-    type = '', 
-    duration = 3000
-}) {
-    const main = document.getElementById('toast')
-    if (main) {
-        const toast = document.createElement('div')
-        const icons = {
-            success: 'fas fa-check-circle',
-            info: 'fas fa-info-circle',
-            warn: 'fas fa-exclamation-circle',
-            error: 'fas fa-exclamation-circle',
-        };
-        const icon = icons[type];
-        const delay = (duration / 1000).toFixed(2);
-
-        toast.classList.add('toast', `toast--${type}`);
-        toast.style.animation = `wipeIn ease 0.25s, fadeOut ease-in-out 1s ${delay}s forwards`;
+function handleEvents() {
+    // When click toggle button
+    toggleBtn.onclick = function() {
+        if (isPlaying) {
+            audio.pause();
+        } else {
+            audio.play()
+        }
+        return true;
+    }
+    
+    // When seek the music
+    progressBar.onchange = function(e) {
+        var seekTime = e.target.value / 100 * audio.duration;
+        audio.currentTime = seekTime;
         
-        toast.innerHTML = `
-        <i class="toast__icon ${icon}"></i>
-        <div class="toast__body">
-            <h3 class="toast__title">${ title}</h3>
-            <p class="toast__msg">${message}</p>
-        </div>
-        <i class="toast__close fas fa-times"></i>
-        `;
+        mins = Math.floor(seekTime / 60);
+        mins = mins < 10 ? '0' + mins : mins;
+        secs = Math.floor(seekTime % 60);
+        secs = secs < 10 ? '0' + secs : secs;
+        currentTimeSong.innerHTML = `<span>${mins}</span>:<span>${secs}</span>`;
+    }
+    
+    // When music is played
+    audio.onplay = function() {
+        isPlaying = true;
+        toggleBtn.classList.add('playing');
+        toggleBtn.title = 'Pause'
+    };
 
-        
-        main.appendChild(toast);
+    audio.onpause = function() {
+        isPlaying = false;
+        toggleBtn.classList.remove('playing');
+        toggleBtn.title = 'Play'
+    }
 
-        // Auto remove toast
-        const autoRemovId = setTimeout(() => {
-            main.removeChild(toast)
-        }, duration + 1000) // times remvoe from DOM
+    audio.ontimeupdate = function() {
+        mins = Math.floor(audio.currentTime / 60);
+        mins = mins < 10 ? '0' + mins : mins;
+        secs = Math.floor(audio.currentTime % 60);
+        secs = secs < 10 ? '0' + secs : secs;
+        currentTimeSong.innerHTML = `<span>${mins}</span>:<span>${secs}</span>`;
 
-        // const closeBtn = $('.toast__close');
-        // closeBtn.onclick = function() {
-        //     // main.outerHTML = ''
-        //     console.log({main})
-        //     main.removeChild(this)
+        progressBar.value = Math.floor(audio.currentTime / audio.duration * 100);
 
-        // }
-        // -------or
-        toast.onclick = function(e) {
-            // console.log(e.target)
-            if (e.target.closest('.toast__close')) {
-                main.removeChild(toast);
-                clearTimeout(autoRemovId)
+        endSong = audio.currentTime === audio.duration;
+        if (isRepeat && endSong) {
+            repeatSong();
+        }
+    }
+
+    prevBtn.onclick = function() {
+        if (isShuffle) {
+            shuffleSong();
+        } else {
+            currentIndex--;
+            if (currentIndex < 0) {
+                currentIndex = songs.length - 1;
             }
         }
 
+        playCurrentSong();
+        renderSongs();
+        scrollToActiveSong();
+    }
+
+    nextBtn.onclick = function() {
+        if (isShuffle) {
+            shuffleSong();
+        } else {
+            currentIndex++;
+            if (currentIndex >= songs.length) {
+                currentIndex = 0;
+            }
+        }
+
+        playCurrentSong();
+        renderSongs();
+        scrollToActiveSong();
+
+    }
+
+    repeatBtn.onclick = function() {
+        isRepeat = !isRepeat;
+        repeatBtn.classList.toggle('active');
+        console.log(isRepeat)
+    }
+
+    shuffleBtn.onclick = function() {
+        isShuffle = !isShuffle;
+        shuffleBtn.classList.toggle('active');
+    }
+    shrinkBtn.onclick = function() {
+        isClickShrinkBtn = !isClickShrinkBtn;
+        minimizePlaylist();
+    }
+
+    document.onscroll = function() {
+        minimizePlaylist();
     }
 
     
 }
 
-function showSuccessToast() {
-    toast({
-    title: 'Ooops...',
-    message: 'This funnction will be upgraded soon',
-    type: 'success',
-    duration: 3000
-});
+function defineProperties() { 
+    Object.defineProperty(this, 'currentSong', {
+        get: function() {
+            return songs[currentIndex]
+        }
+    })
+};
+
+function playCurrentSong() {
+    cd.style.backgroundImage = this.currentSong.image;
+    // songName.innerText = this.currentSong.song;
+    // artistName.innerText = this.currentSong.artist;
+    audio.src = this.currentSong.path;
+    audio.play();
+
+    audio.onloadedmetadata = function() {
+        minsLength = Math.floor(audio.duration / 60);
+        minsLength = minsLength < 10 ? '0' + minsLength : minsLength;
+        secsLngth = Math.floor(audio.duration % 60);
+        secsLngth = secsLngth < 10 ? '0' + secsLngth : secsLngth;
+
+        lengthSongPanel.innerHTML = 
+        `<span>${minsLength}</span>:<span>${secsLngth}</span>`;
+        // lengthSongPlaylist.innerHTML = 
+        // `<span>${minsLength}</span>:<span>${secsLngth}</span>`;
+    }
 }
 
-function showInfoToast() {
-    toast({
-    title: 'Ooops...',
-    message: 'This funnction will be upgraded soon',
-    type: 'info',
-    duration: 3000
-});
+function repeatSong() {
+    audio.currentTime = 0;
+    audio.play()
 }
 
-function showWarningToast() {
-    toast({
-    title: 'Ooops...',
-    message: 'This funnction will be upgraded soon',
-    type: 'warn',
-    duration: 3000
-});
+function shuffleSong() {
+    var oldIndex = currentIndex;
+    do {
+        currentIndex = Math.floor(Math.random() * songs.length);
+    } while (oldIndex === currentIndex)
+
+    playCurrentSong();
+    renderSongs();
 }
 
-function showErrorToast() {
-    toast({
-    title: 'Ooops...',
-    message: 'This funnction will be upgraded soon',
-    type: 'error',
-    duration: 5000
-});
+function scrollToActiveSong() {
+    console.log($('.song.active'))
+    $('.song.active').scrollIntoView({
+        behavior: 'smooth',
+    })
+} 
+
+
+function minimizePlaylist() {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    var newCdSize = cdSize - scrollTop;
+
+    cd.style.width = (newCdSize < 0 || isClickShrinkBtn) ? 0 : newCdSize + 'px';
+    cd.style.height = (newCdSize < 0 || isClickShrinkBtn) ? 0 : newCdSize + 'px';
+
+
+    if (newCdSize !== cdSize || isClickShrinkBtn) {
+        shrinkBtn.style.display = 'none';
+        panelPlayer.style.display = 'none';
+        ctrlPanel.style.padding = '0 30px';
+        ctrlPanel.classList.add('flex-c');
+    } else {
+         shrinkBtn.style.display = screen.width < 1024 ? 'block' : 'none';
+        panelPlayer.style.display = 'block';
+        ctrlPanel.style.padding = '20px 30px';
+        ctrlPanel.classList.remove('flex-c');
+    }
 }
 
+function start() {
+    defineProperties();
+    renderSongs();
+    handleEvents();
+    playCurrentSong();
+}
+
+start()
