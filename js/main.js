@@ -27,6 +27,7 @@ var isPlaying = false;
 var isRepeat = false;
 var isShuffle = false;
 var isClickShrinkBtn = false;
+var isMaximize = false;
 
 /*
 1. Render songs ==> OK
@@ -202,6 +203,14 @@ function handleEvents() {
         minimizePlaylist();
     }
 
+    ctrlPanel.onclick = function() {
+        isMaximize = !isMaximize;
+        if (isMaximize) {
+            maximizePlaylist();
+        } else {
+            // minimizePlaylist();
+        }
+    }
     
 }
 
@@ -255,7 +264,6 @@ function scrollToActiveSong() {
     })
 } 
 
-
 function minimizePlaylist() {
     const scrollTop = window.scrollY || document.documentElement.scrollTop;
     var newCdSize = cdSize - scrollTop;
@@ -270,11 +278,21 @@ function minimizePlaylist() {
         ctrlPanel.style.padding = '0 30px';
         ctrlPanel.classList.add('flex-c');
     } else {
-         shrinkBtn.style.display = screen.width < 1024 ? 'block' : 'none';
+        shrinkBtn.style.display = screen.width < 1024 ? 'block' : 'none';
         panelPlayer.style.display = 'block';
         ctrlPanel.style.padding = '20px 30px';
         ctrlPanel.classList.remove('flex-c');
     }
+}
+
+function maximizePlaylist() {
+    cd.style.width = cdSize;
+    cd.style.height = cdSize;
+
+    shrinkBtn.style.display = screen.width < 1024 ? 'block' : 'none';
+    panelPlayer.style.display = 'block';
+    ctrlPanel.style.padding = '20px 30px';
+    ctrlPanel.classList.remove('flex-c');
 }
 
 function start() {
