@@ -148,8 +148,14 @@ function handleEvents() {
         progressBar.value = Math.floor(audio.currentTime / audio.duration * 100);
 
         endSong = audio.currentTime === audio.duration;
-        if (isRepeat && endSong) {
-            repeatSong();
+        if (isRepeat || endSong) {
+            if (isRepeat && endSong) {
+                repeatSong();
+                exit;
+            }
+            if (endSong) {
+                nextBtn.click()
+            }
         }
     }
 
@@ -187,7 +193,6 @@ function handleEvents() {
     repeatBtn.onclick = function() {
         isRepeat = !isRepeat;
         repeatBtn.classList.toggle('active');
-        console.log(isRepeat)
     }
 
     shuffleBtn.onclick = function() {
@@ -206,9 +211,9 @@ function handleEvents() {
     ctrlPanel.onclick = function() {
         isMaximize = !isMaximize;
         if (isMaximize) {
-            maximizePlaylist();
+            minimizePlaylist();
         } else {
-            // minimizePlaylist();
+            maximizePlaylist();
         }
     }
     
@@ -286,8 +291,8 @@ function minimizePlaylist() {
 }
 
 function maximizePlaylist() {
-    cd.style.width = cdSize;
-    cd.style.height = cdSize;
+    cd.style.width = cdSize + 'px';
+    cd.style.height = cdSize + 'px';
 
     shrinkBtn.style.display = screen.width < 1024 ? 'block' : 'none';
     panelPlayer.style.display = 'block';
