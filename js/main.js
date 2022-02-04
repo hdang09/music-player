@@ -2,6 +2,7 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
 const cd = $('.panel-playlist__cd');
+console.log(cd);
 const cdSize = cd.offsetWidth;
 const songList = $('.song-list');
 const shrinkBtn = $('.shrink-btn');
@@ -33,11 +34,11 @@ var isMaximize = false;
 1. Render songs ==> OK
 2. Scroll top ==> OK
 3. Play / pause / seek ==> OK
-4. CD rotate
+4. CD rotate ==> OK
 5. Next / prev ==> OK
 6. Random ==> OK
 7. Next / Repeat when ended ==> OK
-8. Active song (songName, artist)
+8. Active song (songName, artist) ==> OK
 9. Scroll active song into view ==> OK
 10. Play song when click
 */
@@ -73,14 +74,14 @@ songs = [
     {
         name: 'Muộn Rồi Mà Sao Còn',
         singer: 'Sơn Tùng M-TP',
-        image: './img/playlist/img1.jpg',
+        image: './img/playlist/img5.jpg',
         path: './music/Muộn Rồi Mà Sao Còn.mp3',
         album: 'm-tp M-TP'
     },
     {
         name: 'Nơi Này Có Anh (Masew Bootleg)',
         singer: 'Sơn Tùng M-TP',
-        image: './img/playlist/img1.jpg',
+        image: './img/playlist/img6.jpg',
         path: './music/Noi-Nay-Co-Anh-Masew-Bootleg-Son-Tung-M-TP-Masew.mp3',
         album: 'm-tp M-TP'
     },
@@ -130,12 +131,14 @@ function handleEvents() {
         isPlaying = true;
         toggleBtn.classList.add('playing');
         toggleBtn.title = 'Pause'
+        cdRotate.play();
     };
 
     audio.onpause = function() {
         isPlaying = false;
         toggleBtn.classList.remove('playing');
-        toggleBtn.title = 'Play'
+        toggleBtn.title = 'Play';
+        cdRotate.pause()
     }
 
     audio.ontimeupdate = function() {
@@ -204,19 +207,26 @@ function handleEvents() {
         minimizePlaylist();
     }
 
-    document.onscroll = function() {
-        minimizePlaylist();
-    }
+    // document.onscroll = function() {
+    //     minimizePlaylist();
+    // }
 
     ctrlPanel.onclick = function() {
         isMaximize = !isMaximize;
-        if (isMaximize) {
-            minimizePlaylist();
-        } else {
+        if (!isMaximize) {
             maximizePlaylist();
+        } else {
+            // minimizePlaylist();
         }
     }
     
+    const cdRotate = cd.animate([
+        { transform: 'rotate(360deg)' }
+    ], {
+        duration: 10000,
+        iterations: Infinity
+    })
+    // cdRotate.pause()
 }
 
 function defineProperties() { 
@@ -227,10 +237,16 @@ function defineProperties() {
     })
 };
 
+function getCurrentSong() {
+    return songs[currentIndex]
+}
+
 function playCurrentSong() {
-    cd.style.backgroundImage = this.currentSong.image;
-    // songName.innerText = this.currentSong.song;
-    // artistName.innerText = this.currentSong.artist;
+    cd.style.backgroundImage = `url('${getCurrentSong().image}')`;
+    console.log(currentIndex)
+    songName.innerText = getCurrentSong().name;
+    console.log( `url(${getCurrentSong().image}) no-repeat center / contain`);
+    artistName.innerText = getCurrentSong().singer;
     audio.src = this.currentSong.path;
     audio.play();
 
@@ -300,11 +316,18 @@ function maximizePlaylist() {
     ctrlPanel.classList.remove('flex-c');
 }
 
+function clickSongToPlay() {
+    renderSongs()
+    playlists = $('.song-list .song');
+    // playlists.
+}
+
 function start() {
     defineProperties();
     renderSongs();
     handleEvents();
     playCurrentSong();
+    clickSongToPlay();
 }
 
 start()
