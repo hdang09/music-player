@@ -1,8 +1,11 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
+const nav = $('#nav');
+const navItemLinks = $$('.nav__item-link');
+const navListTitles = $$('.nav__list-title');
+const menuNavBtn = $('.nav__logo-menu');
 const cd = $('.panel-playlist__cd');
-console.log(cd);
 const cdSize = cd.offsetWidth;
 const songList = $('.song-list');
 const shrinkBtn = $('.shrink-btn');
@@ -29,6 +32,7 @@ var isRepeat = false;
 var isShuffle = false;
 var isClickShrinkBtn = false;
 var isMaximize = false;
+var isShrinking = false;
 
 /*
 1. Render songs ==> OK
@@ -65,24 +69,24 @@ songs = [
         album: 'm-tp M-TP'
     },
     {
-        name: 'Lạc Trôi (Triple D Remix)',
-        singer: 'Sơn Tùng M-TP',
-        image: './img/playlist/img4.jpg',
-        path: './music/Lac-Troi-Triple-D-Remix-Son-Tung-M-TP.mp3',
-        album: 'm-tp M-TP'
-    },
-    {
         name: 'Muộn Rồi Mà Sao Còn',
         singer: 'Sơn Tùng M-TP',
-        image: './img/playlist/img5.jpg',
+        image: './img/playlist/img4.jpg',
         path: './music/Muộn Rồi Mà Sao Còn.mp3',
         album: 'm-tp M-TP'
     },
     {
         name: 'Nơi Này Có Anh (Masew Bootleg)',
         singer: 'Sơn Tùng M-TP',
-        image: './img/playlist/img6.jpg',
+        image: './img/playlist/img5.jpg',
         path: './music/Noi-Nay-Co-Anh-Masew-Bootleg-Son-Tung-M-TP-Masew.mp3',
+        album: 'm-tp M-TP'
+    },
+    {
+        name: 'Lạc Trôi (Triple D Remix)',
+        singer: 'Sơn Tùng M-TP',
+        image: './img/playlist/img6.jpg',
+        path: './music/Lac-Troi-Triple-D-Remix-Son-Tung-M-TP.mp3',
         album: 'm-tp M-TP'
     },
 ]
@@ -91,7 +95,7 @@ function renderSongs() {
     var htmls = songs.map((song, index) => {
         return `
         <li class="row song ${currentIndex === index ? 'active' : ''}">
-            <div class="playlist__label col l-1 m-1 c-1">${++index}</div>
+            <div class="playlist__label order col l-1 m-1 c-1">${++index}</div>
             <div class="playlist__label col l-5 m-5 c-5">${song.name}</div>
             <div class="playlist__label col l-3 m-3 c-4">${song.singer}</div>
             <div class="playlist__label length col l-1 m-1 c-2">2:59</div>
@@ -111,7 +115,6 @@ function handleEvents() {
         } else {
             audio.play()
         }
-        return true;
     }
     
     // When seek the music
@@ -226,7 +229,25 @@ function handleEvents() {
         duration: 10000,
         iterations: Infinity
     })
-    // cdRotate.pause()
+    cdRotate.pause()
+
+    playlist.onclick = function(e) {
+        var singleSong = e.target.closest('.song:not(.active)');
+        if (singleSong) {
+            currentIndex = Number(singleSong.querySelector('.order').innerText - 1)
+            renderSongs();
+            playCurrentSong();
+
+        }
+    }
+
+    menuNavBtn.onclick = function() {
+        if (isShrinking) {
+            expandNavMenu()
+        } else {
+            shrinkNavMenu()
+        }
+    }
 }
 
 function defineProperties() { 
@@ -243,9 +264,7 @@ function getCurrentSong() {
 
 function playCurrentSong() {
     cd.style.backgroundImage = `url('${getCurrentSong().image}')`;
-    console.log(currentIndex)
     songName.innerText = getCurrentSong().name;
-    console.log( `url(${getCurrentSong().image}) no-repeat center / contain`);
     artistName.innerText = getCurrentSong().singer;
     audio.src = this.currentSong.path;
     audio.play();
@@ -316,10 +335,39 @@ function maximizePlaylist() {
     ctrlPanel.classList.remove('flex-c');
 }
 
-function clickSongToPlay() {
-    renderSongs()
-    playlists = $('.song-list .song');
-    // playlists.
+function shrinkNavMenu() {
+    isShrinking = true;
+    nav.style.width = 65 + 'px';
+    nav.style.paddingLeft = 0;
+
+    navItemLinks.forEach(navItemLink => {
+        navItemLink.style.display = 'none'
+    })
+
+    $('.nav__item').style.paddingRight = 0;
+    $('.nav__item.active').style.border = 0;
+
+    navListTitles.forEach(navListTitle => {
+        navListTitle.style.display = 'none';
+    })
+}
+
+function expandNavMenu() {
+    isShrinking = false;
+    nav.style.width = 330 + 'px';
+    nav.style.paddingLeft = '40px';
+    console.log(nav.style)
+
+    navItemLinks.forEach(navItemLink => {
+        navItemLink.style.display = 'inline-block'
+    })
+
+    $('.nav__item').style.paddingRight = '20px';
+    $('.nav__item.active').style.borderRight = '5px solid #000';
+
+    navListTitles.forEach(navListTitle => {
+        navListTitle.style.display = 'block';
+    })
 }
 
 function start() {
@@ -327,7 +375,6 @@ function start() {
     renderSongs();
     handleEvents();
     playCurrentSong();
-    clickSongToPlay();
 }
 
 start()

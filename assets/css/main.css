@@ -31,7 +31,7 @@
 
 .nav__logo-menu {
     font-size: 3rem;
-    margin-right: 30px;
+    margin: 0 15px;
     cursor: pointer;    
 }
 
@@ -474,6 +474,7 @@
     justify-content: center;
     align-items: center;
     padding: 20px;
+    /* animation: wipeIn ease 0.25s, fadeOut ease-in-out 1s 3s forwards; */
     transition: all linear .25s; 
     /* This 'transition' make it slide to top smoother */
 }
